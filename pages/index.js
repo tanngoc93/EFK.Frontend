@@ -6,9 +6,9 @@ import Router from "next/router"
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
 // Will only be available on the server-side
-console.log(">>> API_HOST:", serverRuntimeConfig.API_HOST_ON_SERVER)
+console.log(">>> ON_SERVER:", serverRuntimeConfig.API_HOST_ON_SERVER)
 // Will be available on both server-side and client-side
-console.log(">>> API_HOST_ON_SERVER", publicRuntimeConfig.API_HOST)
+console.log(">>> ON_PUBLIC", publicRuntimeConfig.API_HOST)
 
 class Index extends React.Component {
   state = {
@@ -20,7 +20,7 @@ class Index extends React.Component {
     let images = []
 
     const res = await fetch(
-      `https://backend.theguardon.com/api/v1/images`
+      `${publicRuntimeConfig.API_HOST}/api/v1/images`
     )
     .then(response => response.json())
     .then(data => {
@@ -44,7 +44,7 @@ class Index extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    fetch(`https://backend.theguardon.com/api/v1/images`, {
+    fetch(`${publicRuntimeConfig.API_HOST}/api/v1/images`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -67,7 +67,7 @@ class Index extends React.Component {
   handleDestroy = (event, id) => {
     event.preventDefault();
 
-    fetch(`https://backend.theguardon.com/api/v1/images/${id}`, {
+    fetch(`${publicRuntimeConfig.API_HOST}/api/v1/images/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
