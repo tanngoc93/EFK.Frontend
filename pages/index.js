@@ -11,10 +11,8 @@ class Index extends React.Component {
   static async getInitialProps ({ ctx }) {
     let images = []
 
-    console.log('>>> API_HOST:', process.env.API_HOST)
-
     const res = await fetch(
-      `${process.env.API_HOST}/api/v1/images`
+      `//backend.theguardon.com/api/v1/images`
     )
     .then(response => response.json())
     .then(data => {
