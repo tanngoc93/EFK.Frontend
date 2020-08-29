@@ -12,7 +12,7 @@ class Index extends React.Component {
     let images = []
 
     const res = await fetch(
-      `//backend.theguardon.com/api/v1/images`
+      `https://backend.theguardon.com/api/v1/images`
     )
     .then(response => response.json())
     .then(data => {
@@ -36,7 +36,7 @@ class Index extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    fetch(`${process.env.API_HOST}/api/v1/images`, {
+    fetch(`https://backend.theguardon.com/api/v1/images`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -59,7 +59,7 @@ class Index extends React.Component {
   handleDestroy = (event, id) => {
     event.preventDefault();
 
-    fetch(`${process.env.API_HOST}/api/v1/images/${ id }`, {
+    fetch(`https://backend.theguardon.com/api/v1/images/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
