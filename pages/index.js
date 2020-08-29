@@ -1,6 +1,14 @@
 import React from "react"
 import fetch from "isomorphic-unfetch"
+import getConfig from "next/config"
 import Router from "next/router"
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+// Will only be available on the server-side
+console.log(">>> API_HOST:", serverRuntimeConfig.API_HOST_ON_SERVER)
+// Will be available on both server-side and client-side
+console.log(">>> API_HOST_ON_SERVER", publicRuntimeConfig.API_HOST)
 
 class Index extends React.Component {
   state = {
@@ -10,9 +18,6 @@ class Index extends React.Component {
 
   static async getInitialProps ({ ctx }) {
     let images = []
-
-    console.log(">>> API_HOST:", process.env.API_HOST)
-    console.log(">>> API_HOST_ON_SERVER:", process.env.API_HOST_ON_SERVER)
 
     const res = await fetch(
       `https://backend.theguardon.com/api/v1/images`
